@@ -10,7 +10,7 @@ ARG MVN_ARGS="install"
 # Copy build files
 COPY pom.xml ./
 COPY distro ./distro/
-yes | npx openmrs@next build --api-url /openmrs && npx openmrs@next assemble --mode config --config importmap.json
+
 # Build the distro
 RUN --mount=type=secret,id=m2settings,target=/root/.m2/settings.xml mvn $MVN_ARGS_SETTINGS $MVN_ARGS
 
