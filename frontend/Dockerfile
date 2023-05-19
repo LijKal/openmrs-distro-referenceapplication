@@ -9,8 +9,14 @@ WORKDIR /app
 COPY spa-build-config.json .
 
 ARG CACHE_BUST
-RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-build-config.json --target ./spa
-RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
+# RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-build-config.json --target ./spa
+RUN npx openmrs@next assemble --manifest --mode config --config spa-build-config.json --target ./spa
+
+# RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
+
+RUN npx openmrs@next build --build-config spa-build-config.json --target ./spa 
+
+# RUN npx openmrs@next build --api-url /openmrs && npx openmrs@next assemble --mode config --config importmap.json
 
 FROM nginx:1.23-alpine
 
