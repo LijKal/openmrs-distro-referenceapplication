@@ -3,10 +3,10 @@ version: "3.7"
 services:
   # Proxy
   proxy:
-    image: ethiohri-distro_proxy
+    image: lijkal/ethiohri-distro_proxy
     depends_on:
       - frontend
-      - openmrs
+      - backend
     ports:
       - "80:80"
 
@@ -22,7 +22,7 @@ services:
       timeout: 5s
 
   # OpenMRS:
-  openmrs:
+  backend:
     image: lijkal/ethiohri-distro-backend-2_6
     depends_on:
       - db
